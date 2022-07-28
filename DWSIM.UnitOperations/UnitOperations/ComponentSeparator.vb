@@ -101,10 +101,6 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_CompoundSeparator
 
-        Public Property EmbeddedImageData As String = ""
-
-        Public Property UseEmbeddedImage As Boolean = False
-
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Separators
 
         Protected m_ei As Double

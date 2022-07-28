@@ -132,8 +132,7 @@ Public Class FormMain
             unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
 
             aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing And
-                                                                   Not x.IsAbstract And x.GetInterface("DWSIM.Interfaces.IExternalUnitOperation") Is Nothing, True, False)))
+            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing And Not x.IsAbstract, True, False)))
 
             For Each item In aTypeList.OrderBy(Function(x) x.Name)
                 If Not item.IsAbstract Then
@@ -143,7 +142,7 @@ Public Class FormMain
             Next
 
             For Each item In ExternalUnitOperations.Values.OrderBy(Function(x) x.Name)
-                If Not ObjectList.ContainsKey(item.Name) Then ObjectList.Add(item.Name, item)
+                ObjectList.Add(item.Name, item)
             Next
 
             My.Application.MainThreadId = Threading.Thread.CurrentThread.ManagedThreadId
@@ -698,12 +697,6 @@ Public Class FormMain
 
         Dim otheruos = SharedClasses.Utility.LoadAdditionalUnitOperations()
 
-        Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
-
-        Dim euolist As List(Of Interfaces.IExternalUnitOperation) = SharedClasses.Utility.GetUnitOperations(unitopassembly)
-
-        otheruos.AddRange(euolist)
-
         For Each uo In otheruos
             If Not ExternalUnitOperations.ContainsKey(uo.Description) Then
                 ExternalUnitOperations.Add(uo.Description, uo)
@@ -833,29 +826,29 @@ Public Class FormMain
 
         PropertyPackages.Add(LKPPP.ComponentName.ToString, LKPPP)
 
-        'Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
-        'EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
-        'EUQPP.ComponentDescription = DWSIM.App.GetLocalString("DescEUPP")
+        Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
+        EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
+        EUQPP.ComponentDescription = DWSIM.App.GetLocalString("DescEUPP")
 
-        'PropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
+        PropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
 
-        'Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
-        'ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
-        'ENQPP.ComponentDescription = DWSIM.App.GetLocalString("DescENPP")
+        Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
+        ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
+        ENQPP.ComponentDescription = DWSIM.App.GetLocalString("DescENPP")
 
-        'PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
+        PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
 
-        'Dim LIQPP As New LIQUAC2PropertyPackage()
-        'LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
-        'LIQPP.ComponentDescription = DWSIM.App.GetLocalString("DescLIPP")
+        Dim LIQPP As New LIQUAC2PropertyPackage()
+        LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
+        LIQPP.ComponentDescription = DWSIM.App.GetLocalString("DescLIPP")
 
-        'PropertyPackages.Add(LIQPP.ComponentName.ToString, LIQPP)
+        PropertyPackages.Add(LIQPP.ComponentName.ToString, LIQPP)
 
-        'Dim DHPP As New DebyeHuckelPropertyPackage()
-        'DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
-        'DHPP.ComponentDescription = DWSIM.App.GetLocalString("DescDHPP")
+        Dim DHPP As New DebyeHuckelPropertyPackage()
+        DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
+        DHPP.ComponentDescription = DWSIM.App.GetLocalString("DescDHPP")
 
-        'PropertyPackages.Add(DHPP.ComponentName.ToString, DHPP)
+        PropertyPackages.Add(DHPP.ComponentName.ToString, DHPP)
 
         Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
         BOPP.ComponentName = "Black Oil"
@@ -1137,7 +1130,7 @@ Public Class FormMain
         LoadCPDB()
 
         'load ChEDL database
-        'LoadCheDLDB()
+        LoadCheDLDB()
 
         'load Electrolyte XML database
         LoadEDB()

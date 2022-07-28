@@ -10,7 +10,7 @@
     <AssemblyName>DWSIM.SharedClasses</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -196,8 +196,6 @@
     <Compile Include="TaskHelper\TaskHelper.vb" />
     <Compile Include="UnitsOfMeasure\SystemsOfUnits.vb" />
     <Compile Include="UpdateCheck\UpdateCheck.vb" />
-    <Compile Include="Weather\WeatherData.vb" />
-    <Compile Include="Weather\WeatherProvider.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Editor\DynamicsPropertyEditor.en.resx">

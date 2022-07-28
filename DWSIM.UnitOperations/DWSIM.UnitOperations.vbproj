@@ -10,7 +10,7 @@
     <AssemblyName>DWSIM.UnitOperations</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -232,12 +232,12 @@
     <Compile Include="EditingForms\Dynamics\EditingForm_SeparatorFiller.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_AirCooler.designer.vb">
+    <None Include="EditingForms\EditingForm_AirCooler.designer.vb">
       <DependentUpon>EditingForm_AirCooler.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_AirCooler.vb">
+    </None>
+    <None Include="EditingForms\EditingForm_AirCooler.vb">
       <SubType>Form</SubType>
-    </Compile>
+    </None>
     <Compile Include="EditingForms\EditingForm_AnalogGauge.Designer.vb">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </Compile>
@@ -248,36 +248,6 @@
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </Compile>
     <Compile Include="EditingForms\EditingForm_CAPEOPENUO.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_Emixer.designer.vb">
-      <DependentUpon>EditingForm_Emixer.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_Emixer.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_HydroelectricTurbine.Designer.vb">
-      <DependentUpon>EditingForm_HydroelectricTurbine.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_HydroelectricTurbine.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_OPEMFC.Designer.vb">
-      <DependentUpon>EditingForm_OPEMFC.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_OPEMFC.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_ReaktoroGibbs.Designer.vb">
-      <DependentUpon>EditingForm_ReaktoroGibbs.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_ReaktoroGibbs.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_SolarPanel.Designer.vb">
-      <DependentUpon>EditingForm_SolarPanel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_SolarPanel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditingForms\EditingForm_Switch.Designer.vb">
@@ -472,18 +442,6 @@
     <Compile Include="EditingForms\EditingForm_ComprExpndr.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_WaterElectrolyzer.Designer.vb">
-      <DependentUpon>EditingForm_WaterElectrolyzer.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_WaterElectrolyzer.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_WindTurbine.Designer.vb">
-      <DependentUpon>EditingForm_WindTurbine.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EditingForms\EditingForm_WindTurbine.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="EditingForms\Other\Form_CapeOpenSelector.designer.vb">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </Compile>
@@ -627,7 +585,6 @@
     <Compile Include="Indicators\DigitalGauge.vb" />
     <Compile Include="Inputs\Input.vb" />
     <Compile Include="Indicators\LevelGauge.vb" />
-    <Compile Include="Reactors\ReaktoroGibbs.vb" />
     <Compile Include="Switches\Switch.vb" />
     <Compile Include="Languages\Strings.de.Designer.vb">
       <DependentUpon>Strings.de.resx</DependentUpon>
@@ -685,18 +642,10 @@
     <Compile Include="SupportClasses\ComboBoxColumnTemplates.vb" />
     <Compile Include="TypeResolver\Resolver.vb" />
     <Compile Include="CAPE-OPEN\CustomUO_CO.vb" />
-    <Compile Include="UnitOperations\AirCooler2.vb" />
-    <Compile Include="UnitOperations\CleanEnergies\CleanEnergyUnitOpBase.vb" />
-    <Compile Include="UnitOperations\CleanEnergies\EnergyMixer.vb" />
-    <Compile Include="UnitOperations\CleanEnergies\HydroelectricTurbine.vb" />
-    <Compile Include="UnitOperations\CleanEnergies\PEMFC_Amphlett.vb" />
-    <None Include="UnitOperations\CleanEnergies\PEMFC_ChamberlineKim.vb" />
-    <None Include="UnitOperations\CleanEnergies\PEMFC_LarminieDicks.vb" />
-    <Compile Include="UnitOperations\CleanEnergies\SolarPanel.vb" />
-    <Compile Include="UnitOperations\CleanEnergies\WaterElectrolyzer.vb" />
-    <Compile Include="UnitOperations\CleanEnergies\WindTurbine.vb" />
+    <None Include="UnitOperations\AirCooler.vb" />
+    <Compile Include="UnitOperations\CleanEnergy\CleanEnergyUnitOpBase.vb" />
     <Compile Include="UnitOperations\DummyUO.vb" />
-    <Compile Include="UnitOperations\CleanEnergies\PEMFuelCellUnitOpBase.vb" />
+    <Compile Include="UnitOperations\CleanEnergy\PEMFuelCells.vb" />
     <Compile Include="UnitOperations\PythonScriptUO.vb" />
     <Compile Include="UnitOperations\FlowsheetUO.vb" />
     <Compile Include="UnitOperations\OrificePlate.vb" />
@@ -739,9 +688,9 @@
     <EmbeddedResource Include="EditingForms\EditingForm_Adjust.de.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_AirCooler.resx">
+    <None Include="EditingForms\EditingForm_AirCooler.resx">
       <DependentUpon>EditingForm_AirCooler.vb</DependentUpon>
-    </EmbeddedResource>
+    </None>
     <EmbeddedResource Include="EditingForms\EditingForm_AnalogGauge.en.resx">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </EmbeddedResource>
@@ -765,24 +714,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_CustomUO.de.resx">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_Emixer.en.resx">
-      <DependentUpon>EditingForm_Emixer.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_Emixer.resx">
-      <DependentUpon>EditingForm_Emixer.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_HydroelectricTurbine.resx">
-      <DependentUpon>EditingForm_HydroelectricTurbine.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_OPEMFC.resx">
-      <DependentUpon>EditingForm_OPEMFC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_ReaktoroGibbs.resx">
-      <DependentUpon>EditingForm_ReaktoroGibbs.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_SolarPanel.resx">
-      <DependentUpon>EditingForm_SolarPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_Switch.en.resx">
       <DependentUpon>EditingForm_Switch.vb</DependentUpon>
@@ -1044,12 +975,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\EditingForm_ComprExpndr.resx">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_WaterElectrolyzer.resx">
-      <DependentUpon>EditingForm_WaterElectrolyzer.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditingForms\EditingForm_WindTurbine.resx">
-      <DependentUpon>EditingForm_WindTurbine.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\Other\Form_CapeOpenSelector.de.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>

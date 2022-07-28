@@ -102,23 +102,7 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-            If Owner IsNot Nothing AndAlso Owner.UseEmbeddedImage = True AndAlso Owner.EmbeddedImageData <> "" Then
-
-                Dim p As New SKPaint
-                With p
-                    p.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    p.FilterQuality = SKFilterQuality.High
-                End With
-
-                Using image As SKImage = EmbeddedImageGraphic.Base64ToImage(Owner.EmbeddedImageData)
-                    canvas.DrawImage(image, New SKRect(X, Y, X + Width, Y + Height), p)
-                End Using
-
-            Else
-
-                DrawReactor(g, "CS")
-
-            End If
+            DrawReactor(g, "CS")
 
         End Sub
 

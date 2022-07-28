@@ -31,8 +31,6 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Implements IFlowsheet, IFlowsheetCalculationQueue
 
-    Public Property WeatherProvider As IWeatherProvider Implements IFlowsheet.WeatherProvider
-
     Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
 
     Public Property DynamicsManager As IDynamicsManager = New DynamicsManager.Manager Implements IFlowsheet.DynamicsManager
@@ -2306,11 +2304,6 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                             obj.CreateConnectors(0, 0)
                             obj.Owner = Nothing
                             DirectCast(euo, Interfaces.ISimulationObject).GraphicObject = Nothing
-                        Else
-                            Try
-                                obj.CreateConnectors(0, 0)
-                            Catch ex As Exception
-                            End Try
                         End If
                     Else
                         If obj.Name = "" Then obj.Name = obj.Tag
@@ -2910,21 +2903,21 @@ Label_00CC:
         Dim t11 = TaskHelper.Run(Sub()
 
 
-                                     'Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
-                                     'EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
-                                     'plist.Add(EUQPP)
+                                     Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
+                                     EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
+                                     plist.Add(EUQPP)
 
-                                     'Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
-                                     'ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
-                                     'plist.Add(ENQPP)
+                                     Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
+                                     ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
+                                     plist.Add(ENQPP)
 
-                                     'Dim LIQPP As New LIQUAC2PropertyPackage()
-                                     'LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
-                                     'plist.Add(LIQPP)
+                                     Dim LIQPP As New LIQUAC2PropertyPackage()
+                                     LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
+                                     plist.Add(LIQPP)
 
-                                     'Dim DHPP As New DebyeHuckelPropertyPackage()
-                                     'DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
-                                     'plist.Add(DHPP)
+                                     Dim DHPP As New DebyeHuckelPropertyPackage()
+                                     DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
+                                     plist.Add(DHPP)
 
                                      Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
                                      BOPP.ComponentName = "Black Oil"
@@ -2988,12 +2981,6 @@ Label_00CC:
     Sub AddExternalUOs()
 
         Dim otheruos = SharedClasses.Utility.LoadAdditionalUnitOperations()
-
-        Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
-
-        Dim euolist As List(Of Interfaces.IExternalUnitOperation) = SharedClasses.Utility.GetUnitOperations(unitopassembly)
-
-        otheruos.AddRange(euolist)
 
         For Each uo In otheruos
             If Not ExternalUnitOperations.ContainsKey(uo.Description) Then
@@ -3067,8 +3054,7 @@ Label_00CC:
 
             Dim aTypeList As New List(Of Type)
             aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing And
-                                                                   Not x.IsAbstract And x.GetInterface("DWSIM.Interfaces.IExternalUnitOperation") Is Nothing, True, False)))
+            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
 
             For Each item In aTypeList.OrderBy(Function(x) x.Name)
                 If Not item.IsAbstract Then

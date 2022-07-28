@@ -216,8 +216,6 @@
 
     Function RunCodeOnUIThread2(act As Action) As Task
 
-    Property WeatherProvider As IWeatherProvider
-
 End Interface
 
 ''' <summary>

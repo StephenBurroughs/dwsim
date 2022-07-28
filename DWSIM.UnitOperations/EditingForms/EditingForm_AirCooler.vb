@@ -3,13 +3,12 @@ Imports DWSIM.ExtensionMethods
 Imports DWSIM.Inspector
 Imports System.Windows.Forms
 Imports DWSIM.Interfaces.Enums.GraphicObjects
-Imports DWSIM.UnitOperations.UnitOperations
 
 Public Class EditingForm_AirCooler
 
     Inherits SharedClasses.ObjectEditorForm
 
-    Public Property SimObject As AirCooler2
+    Public Property SimObject As AirCooler
 
     Public Loaded As Boolean = False
 
@@ -182,11 +181,6 @@ Public Class EditingForm_AirCooler
             tbTubePitch.Text = Format(cv.ConvertFromSI(su.thickness, .Tube_Pitch), nf)
             tbTubeRoughness.Text = cv.ConvertFromSI(su.diameter, .Tube_Roughness)
             tbTubeThermalCond.Text = cv.ConvertFromSI(su.thermalConductivity, .Tube_ThermalConductivity)
-
-            rbUseGlobal.Checked = SimObject.UseGlobalWeather
-
-            tbInletAirPre.Enabled = Not SimObject.UseGlobalWeather
-            tbInletAirTemp.Enabled = Not SimObject.UseGlobalWeather
 
         End With
 
@@ -456,14 +450,6 @@ Public Class EditingForm_AirCooler
 
         End If
 
-    End Sub
-
-    Private Sub rbUserDef_CheckedChanged(sender As Object, e As EventArgs) Handles rbUserDef.CheckedChanged, rbUseGlobal.CheckedChanged
-        If Loaded Then
-            SimObject.UseGlobalWeather = rbUseGlobal.Checked
-            tbInletAirPre.Enabled = Not SimObject.UseGlobalWeather
-            tbInletAirTemp.Enabled = Not SimObject.UseGlobalWeather
-        End If
     End Sub
 
 End Class

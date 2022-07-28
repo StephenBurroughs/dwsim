@@ -8,11 +8,12 @@
     <OutputType>Library</OutputType>
     <RootNamespace>DWSIM.UI.Web</RootNamespace>
     <AssemblyName>DWSIM.UI.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -116,7 +117,6 @@
     <TypeScriptCompile Include="ClientApp\src\components\navigation-bar\navigation-bar.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\interfaces\documents\document.interfaces.ts" />
-    <TypeScriptCompile Include="ClientApp\src\interfaces\services\users-service.interface.ts" />
     <TypeScriptCompile Include="ClientApp\src\pages\login-intro.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\open-dashboard-file.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\react-app-env.d.ts" />

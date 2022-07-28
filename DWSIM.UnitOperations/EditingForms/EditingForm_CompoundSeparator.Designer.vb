@@ -24,7 +24,7 @@ Partial Class EditingForm_CompoundSeparator
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_CompoundSeparator))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -69,9 +69,6 @@ Partial Class EditingForm_CompoundSeparator
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.chkUseEmbeddedImage = New System.Windows.Forms.CheckBox()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -81,7 +78,6 @@ Partial Class EditingForm_CompoundSeparator
         Me.GroupBox6.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -173,7 +169,7 @@ Partial Class EditingForm_CompoundSeparator
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.18362}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -455,8 +451,8 @@ Partial Class EditingForm_CompoundSeparator
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToResizeColumns = False
         Me.DataGridView1.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -499,7 +495,6 @@ Partial Class EditingForm_CompoundSeparator
         'Panel1
         '
         resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.Controls.Add(Me.GroupBox7)
         Me.Panel1.Controls.Add(Me.GroupBox6)
         Me.Panel1.Controls.Add(Me.GroupBox1)
         Me.Panel1.Controls.Add(Me.GroupBox5)
@@ -511,35 +506,6 @@ Partial Class EditingForm_CompoundSeparator
         Me.ToolTip1.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip2"))
         '
-        'GroupBox7
-        '
-        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
-        Me.GroupBox7.Controls.Add(Me.Button2)
-        Me.GroupBox7.Controls.Add(Me.chkUseEmbeddedImage)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox7, resources.GetString("GroupBox7.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox7, resources.GetString("GroupBox7.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox7, resources.GetString("GroupBox7.ToolTip2"))
-        '
-        'Button2
-        '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Name = "Button2"
-        Me.ToolTip1.SetToolTip(Me.Button2, resources.GetString("Button2.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Button2, resources.GetString("Button2.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Button2, resources.GetString("Button2.ToolTip2"))
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'chkUseEmbeddedImage
-        '
-        resources.ApplyResources(Me.chkUseEmbeddedImage, "chkUseEmbeddedImage")
-        Me.chkUseEmbeddedImage.Name = "chkUseEmbeddedImage"
-        Me.ToolTip1.SetToolTip(Me.chkUseEmbeddedImage, resources.GetString("chkUseEmbeddedImage.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.chkUseEmbeddedImage, resources.GetString("chkUseEmbeddedImage.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.chkUseEmbeddedImage, resources.GetString("chkUseEmbeddedImage.ToolTip2"))
-        Me.chkUseEmbeddedImage.UseVisualStyleBackColor = True
-        '
         'ToolTipChangeTag
         '
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
@@ -548,7 +514,7 @@ Partial Class EditingForm_CompoundSeparator
         'EditingForm_CompoundSeparator
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Panel1)
         Me.Name = "EditingForm_CompoundSeparator"
         Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
@@ -566,8 +532,6 @@ Partial Class EditingForm_CompoundSeparator
         Me.GroupBox6.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -616,7 +580,4 @@ Partial Class EditingForm_CompoundSeparator
     Public WithEvents btnCreateAndConnectOutlet2 As System.Windows.Forms.Button
     Public WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
     Friend WithEvents ToolTipChangeTag As ToolTip
-    Public WithEvents GroupBox7 As GroupBox
-    Public WithEvents Button2 As Button
-    Public WithEvents chkUseEmbeddedImage As CheckBox
 End Class

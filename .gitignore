@@ -88,6 +88,9 @@ TCPServer/bin/Debug/*
 /DWSIM.Interfaces/bin/Release
 /DWSIM.SharedClasses/bin/Release
 /DWSIM.Thermodynamics/bin/Release
+/DWSIM.UI.Web/bin
+/DWSIM.UI.Web/properties
+/DWSIM.UI.Web/obj
 /DWSIM.GlobalSettings/bin/Debug
 /DWSIM.Math/bin/Debug
 /DWSIM.FlowsheetSolver/bin/Debug
@@ -97,17 +100,6 @@ TCPServer/bin/Debug/*
 /SwarmOps/bin/Release
 /DWSIM.ExtensionMethods/bin/Debug
 /DWSIM.Updater/bin/Debug
-/DWSIM.UI.Web/bin
-/DWSIM.UI.Web/properties
-/DWSIM.UI.Web/obj
-/DWSIM.UI.Web/ClientAppOLD/build
-/DWSIM.UI.Web/ClientAppOLD/config
-/DWSIM.UI.Web/ClientAppOLD/node_modules
-/DWSIM.UI.Web/ClientAppOLD/scripts
-/DWSIM.UI.Web/newclientapp/build
-/DWSIM.UI.Web/newclientapp/config
-/DWSIM.UI.Web/newclientapp/node_modules
-/DWSIM.UI.Web/newclientapp/scripts
 /DWSIM.FileDownloader/bin/Debug
 /DWSIM.Thermodynamics.NativeLibraries/bin/Debug
 /packages/SkiaSharp.Views.1.55.1

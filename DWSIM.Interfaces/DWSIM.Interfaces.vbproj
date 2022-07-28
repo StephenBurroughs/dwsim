@@ -10,7 +10,7 @@
     <AssemblyName>DWSIM.Interfaces</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -144,7 +144,6 @@
     <Compile Include="IUnitsOfMeasure.vb" />
     <Compile Include="IUtilityPlugin.vb" />
     <Compile Include="IWatchItem.vb" />
-    <Compile Include="IWeatherProvider.vb" />
     <Compile Include="IWelcomeScreen.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

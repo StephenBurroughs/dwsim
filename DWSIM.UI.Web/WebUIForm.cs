@@ -31,7 +31,7 @@ namespace DWSIM.UI.Web
         public bool UseLocalUI { get; private set; }
 
 
-        public WebUIForm(string initialUrl, string title = null, bool userLocalUI = false)
+        public WebUIForm(string initialUrl, string title = null, bool userLocalUI = true)
         {
             // If userLocalUI == false, then real URL must be provided
             if (!userLocalUI && (String.IsNullOrWhiteSpace(initialUrl) || !Regex.IsMatch(initialUrl, "https*://")))

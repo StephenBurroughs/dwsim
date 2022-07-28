@@ -55,8 +55,6 @@ Public Class FormFlowsheet
 
 #Region "    Variable Declarations "
 
-    Public Property WeatherProvider As IWeatherProvider = New WeatherProvider() Implements IFlowsheet.WeatherProvider
-
     Public Property FileDatabaseProvider As IFileDatabaseProvider = New FileStorage.FileDatabaseProvider Implements IFlowsheet.FileDatabaseProvider
 
     Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
@@ -617,11 +615,8 @@ Public Class FormFlowsheet
         If Not FormMain.IsPro And My.Settings.ShowWhatsNew Then
             Task.Delay(5000).ContinueWith(Sub(t)
                                               UIThread(Sub()
-                                                           Try
-                                                               Dim fwn As New FormWhatsNew()
-                                                               fwn.ShowDialog(Me)
-                                                           Catch ex As Exception
-                                                           End Try
+                                                           Dim fwn As New FormWhatsNew()
+                                                           fwn.ShowDialog(Me)
                                                        End Sub)
                                           End Sub)
         End If
@@ -3695,11 +3690,6 @@ Public Class FormFlowsheet
         Options.FilePath = filepath
         FormMain.SaveFile(True)
 
-    End Sub
-
-    Private Sub CriadorDeComponentesSólidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriadorDeComponentesSólidosToolStripMenuItem.Click
-        Dim fqc As New FormCreateNewSolid()
-        fqc.ShowDialog(Me)
     End Sub
 
     Public Sub ToggleFlowsheetAnimation() Implements IFlowsheet.ToggleFlowsheetAnimation

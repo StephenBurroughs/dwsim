@@ -20,7 +20,7 @@ export interface IInitializeDashboardState {
     isError: boolean;
 }
 
-/*export const user_token = window.localStorage.getItem("s365_local_user_token");*/
+export const user_token = window.localStorage.getItem("s365_local_user_token");
 const DashboardServiceUrl = process.env.REACT_APP_DASHBOARD_SERVICE_URL;
 
 
@@ -56,31 +56,31 @@ export function withInitializeDashboard(WrappedComponent: any) {
 
         }
 
-        //async getUserToken() {
-        //    console.log("chrome.webview?.hostObjects?.authService", chrome.webview?.hostObjects?.authService);
-        //    let token = !chrome.webview?.hostObjects?.authService ? user_token : undefined;
-        //    if (chrome.webview?.hostObjects?.authService) {
-        //        this.setState({ isLoaded: false });
+        async getUserToken() {
+            console.log("chrome.webview?.hostObjects?.authService", chrome.webview?.hostObjects?.authService);
+            let token = !chrome.webview?.hostObjects?.authService ? user_token : undefined;
+            if (chrome.webview?.hostObjects?.authService) {
+                this.setState({ isLoaded: false });
 
-        //        const authService = chrome.webview.hostObjects.authService;
-        //        try {
-        //            token = await authService.getUserToken();
-        //        } catch (error) {
+                const authService = chrome.webview.hostObjects.authService;
+                try {
+                    token = await authService.getUserToken();
+                } catch (error) {
 
-        //            token = "";
-        //        }
-        //    }
-        //    console.log("App.tsx token", token, !!token);
-        //    return token;
-        //}
+                    token = "";
+                }
+            }
+            console.log("App.tsx token", token, !!token);
+            return token;
+        }
         async getBaseFolder(token: string) {
 
 
             try {
-                //if (!!token && token.length > 0) {
+                if (!!token && token.length > 0) {
                     this.setState({ isLoaded: false });
                     const data = {
-                        /*userAccessToken: token,*/
+                        userAccessToken: token,
                         siteId: "not required",
                         flowsheetsListId: "not required",
                         tagsListId: "not required"

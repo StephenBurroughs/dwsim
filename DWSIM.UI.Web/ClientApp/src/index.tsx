@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import { HashRouter } from "react-router-dom";
 import './index.css';
 import App from './App';
@@ -9,10 +9,10 @@ import { initializeFileTypeIcons } from '@uifabric/file-type-icons';
 initializeIcons();
 initializeFileTypeIcons();
 ReactDOM.render(
-    <HashRouter>
-        <App />
+  <HashRouter>    
+    <App />
     </HashRouter>,
-    document.getElementById('root')
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
