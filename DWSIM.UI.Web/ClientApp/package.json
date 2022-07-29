@@ -5,7 +5,7 @@
     "homepage": ".",
     "proxy":  "http://localhost:7801",
   "dependencies": {
-    "@babel/core": "7.12.3",
+    "@babel/core": "7.13.0",
     "@fluentui/react": "^8.41.0",
     "@microsoft/microsoft-graph-client": "^3.0.0",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
@@ -67,6 +67,7 @@
     "react-app-polyfill": "^2.0.0",
     "react-dev-utils": "^11.0.3",
     "react-dom": "^16.14.0",
+    "react-file-reader": "1.1.4",
     "react-hook-form": "^7.19.1",
     "react-refresh": "^0.8.3",
     "react-router-dom": "5.3.0",

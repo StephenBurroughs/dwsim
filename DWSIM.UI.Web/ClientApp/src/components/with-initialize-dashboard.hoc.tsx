@@ -36,7 +36,7 @@ export function withInitializeDashboard(WrappedComponent: any) {
             super(props);
             this.state = {
                 isLoaded: false,
-                isDashboardInitialized: false,
+                isDashboardInitialized: true,
                 isLoggedIn: true,
                 isError: false,
                 siteId: "",
@@ -46,30 +46,30 @@ export function withInitializeDashboard(WrappedComponent: any) {
         }
 
         async componentDidMount() {
-            const token = await this.getUserToken();
-            if (token) {
-                this.setState({ isLoggedIn: true, isLoaded: true });
-                await this.getBaseFolder(token);
-            } else {
-                this.setState({ isLoggedIn: false, isLoaded: true });
-            }
+            //const token = await this.getUserToken();
+            //if (token) {
+            //    this.setState({ isLoggedIn: true, isLoaded: true });
+            //    await this.getBaseFolder(token);
+            //} else {
+            this.setState({ isLoggedIn: true, isLoaded: true });
+            //}
 
         }
 
         async getUserToken() {
-            console.log("chrome.webview?.hostObjects?.authService", chrome.webview?.hostObjects?.authService);
-            let token = !chrome.webview?.hostObjects?.authService ? user_token : undefined;
-            if (chrome.webview?.hostObjects?.authService) {
-                this.setState({ isLoaded: false });
+            //console.log("chrome.webview?.hostObjects?.authService", chrome.webview?.hostObjects?.authService);
+            let token = "hello";
+            //if (chrome.webview?.hostObjects?.authService) {
+            //    this.setState({ isLoaded: false });
 
-                const authService = chrome.webview.hostObjects.authService;
-                try {
-                    token = await authService.getUserToken();
-                } catch (error) {
+            //    const authService = chrome.webview.hostObjects.authService;
+            //    try {
+            //        token = await authService.getUserToken();
+            //    } catch (error) {
 
-                    token = "";
-                }
-            }
+            //        token = "";
+            //    }
+            //}
             console.log("App.tsx token", token, !!token);
             return token;
         }
@@ -86,41 +86,41 @@ export function withInitializeDashboard(WrappedComponent: any) {
                         tagsListId: "not required"
                     };
 
-                    const resp = await fetch(`${DashboardServiceUrl}/api/dashboard/initialize`, {
-                        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                        mode: 'cors', // no-cors, *cors, same-origin
-                        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                        // credentials: 'same-origin', // include, *same-origin, omit
-                        headers: {
-                            'Content-Type': 'application/json'
-                            // 'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        // redirect: 'follow', // manual, *follow, error
-                        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                        body: JSON.stringify(data) // body data type must match "Content-Type" header
-                    });
-                    const folder = await resp.json();
-                    console.log("Initialize resp", folder);
-                    if (!folder || !folder.flowsheets.folderDriveId) {
-                        throw "An error occurred while initializing Simulate 365 Dashboard.";
-                    }
-                    const baseFolder = {
-                        // webUrl: folder.flowsheets.parentName + "/" + folder.flowsheets.folderName,
-                        webUrl: "/" + folder.flowsheets.folderName,
-                        id: folder.flowsheets.folderListId,
-                        driveId: folder.flowsheets.folderDriveId,
-                        displayName: "Dashboard"
-                    } as ISelectedFolder;
+                //    const resp = await fetch(`${DashboardServiceUrl}/api/dashboard/initialize`, {
+                //        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                //        mode: 'cors', // no-cors, *cors, same-origin
+                //        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                //        // credentials: 'same-origin', // include, *same-origin, omit
+                //        headers: {
+                //            'Content-Type': 'application/json'
+                //            // 'Content-Type': 'application/x-www-form-urlencoded',
+                //        },
+                //        // redirect: 'follow', // manual, *follow, error
+                //        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                //        body: JSON.stringify(data) // body data type must match "Content-Type" header
+                //    });
+                //    const folder = await resp.json();
+                //    console.log("Initialize resp", folder);
+                //    if (!folder || !folder.flowsheets.folderDriveId) {
+                //        throw "An error occurred while initializing Simulate 365 Dashboard.";
+                //    }
+                //    const baseFolder = {
+                //        // webUrl: folder.flowsheets.parentName + "/" + folder.flowsheets.folderName,
+                //        webUrl: "/" + folder.flowsheets.folderName,
+                //        id: folder.flowsheets.folderListId,
+                //        driveId: folder.flowsheets.folderDriveId,
+                //        displayName: "Dashboard"
+                //    } as ISelectedFolder;
 
-                    this.setState({
-                        isDashboardInitialized: true,
-                        baseFolder: baseFolder,
-                        siteId: folder.siteId,
-                        flowsheetsDriveId: folder.flowsheetsDriveId,
-                        flowsheetsListId: folder.flowsheetsListId
-                    });
-                } else {
-                    this.setState({ isLoaded: true });
+                //    this.setState({
+                //        isDashboardInitialized: true,
+                //        baseFolder: baseFolder,
+                //        siteId: folder.siteId,
+                //        flowsheetsDriveId: folder.flowsheetsDriveId,
+                //        flowsheetsListId: folder.flowsheetsListId
+                //    });
+                //} else {
+                //    this.setState({ isLoaded: true });
                 }
             }
             catch (error) {
@@ -139,57 +139,57 @@ export function withInitializeDashboard(WrappedComponent: any) {
             const { isLoaded, isError, isLoggedIn, isDashboardInitialized } = this.state;
 
 
-            if (isError) {
-                return (<div style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "100%"
-                }}>
+            //if (isError) {
+            //    return (<div style={{
+            //        display: "flex",
+            //        flexDirection: "column",
+            //        alignItems: "center",
+            //        justifyContent: "center",
+            //        height: "100%"
+            //    }}>
 
-                    <span className="text-danger">An error occurred while initializing Simulate 365 Dashboard.</span>
+            //        <span className="text-danger">An error occurred while initializing Simulate 365 Dashboard.</span>
 
-                </div>)
-            }
+            //    </div>)
+            //}
 
-            if (!isLoggedIn) {
-                return (<div style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "100%"
-                }}>
+            //if (!isLoggedIn) {
+            //    return (<div style={{
+            //        display: "flex",
+            //        flexDirection: "column",
+            //        alignItems: "center",
+            //        justifyContent: "center",
+            //        height: "100%"
+            //    }}>
 
-                    <div className="text-danger" style={{textAlign:"center"}}>
-                       To open, save or upload files to the program, log in with <b>Simulate 365 account</b>.<br/>
-                       The login connects the program to <b>dashboard.simulate365.com</b>, your personal file management system.<br/>
-                        You will be able to access and manage DASHBOARD files directly in your simulator.<br/>
-                       To benefit from this feature, first <b>sync files and flowsheets</b> on your local machine with DASHBOARD.  </div>
+            //        <div className="text-danger" style={{textAlign:"center"}}>
+            //           To open, save or upload files to the program, log in with <b>Simulate 365 account</b>.<br/>
+            //           The login connects the program to <b>dashboard.simulate365.com</b>, your personal file management system.<br/>
+            //            You will be able to access and manage DASHBOARD files directly in your simulator.<br/>
+            //           To benefit from this feature, first <b>sync files and flowsheets</b> on your local machine with DASHBOARD.  </div>
 
-                </div>)
-            }
+            //    </div>)
+            //}
 
-            if (!isLoaded) {
-                return (<div style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "100%"
-                }}>
+            //if (!isLoaded) {
+            //    return (<div style={{
+            //        display: "flex",
+            //        flexDirection: "column",
+            //        alignItems: "center",
+            //        justifyContent: "center",
+            //        height: "100%"
+            //    }}>
 
-                    <Spinner
-                        className="main-spinner"
-                        styles={{ circle: { width: "100px", height: "100px" } }}
-                        label="Loading Dashboard..."
-                        labelPosition="bottom" />
+            //        <Spinner
+            //            className="main-spinner"
+            //            styles={{ circle: { width: "100px", height: "100px" } }}
+            //            label="Loading Dashboard..."
+            //            labelPosition="bottom" />
 
-                </div>);
+            //    </div>);
 
-            }
-            else if (isDashboardInitialized) {
+            //}
+            if (isDashboardInitialized) {
                 return <WrappedComponent {...this.props} {...this.state} />;
             }
             return null;

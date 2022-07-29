@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
-import OpenDashboardFilePage from "./pages/open-dashboard-file.component";
+import OpenFilePage from "./pages/open-file";
 import LoginIntroPage from "./pages/login-intro.component";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,9 +23,7 @@ const  App =()=> {
     pauseOnHover
   /> <div className="App">
 
-      <Route path="/filepicker/open" exact component={OpenDashboardFilePage} />
-      <Route path="/filepicker/save" exact render={(props)=><OpenDashboardFilePage {...{isSaveDialog:true}} {...props} />} />
-
+      <Route path="/" exact component={OpenFilePage} />
       <Route path="/login/intro" exact component={LoginIntroPage} />
 
     </div> </>;
