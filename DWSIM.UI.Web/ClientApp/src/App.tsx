@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
-import OpenFilePage from "./pages/open-file";
+import OpenFilePage from "./pages/dashboard";
 import LoginIntroPage from "./pages/login-intro.component";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

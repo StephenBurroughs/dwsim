@@ -115,12 +115,14 @@
     <TypeScriptCompile Include="ClientApp\src\components\file-type-icon\file-type-icon.data.ts" />
     <TypeScriptCompile Include="ClientApp\src\components\file-type-icon\file-type-icon.helpers.ts" />
     <TypeScriptCompile Include="ClientApp\src\components\file-picker\file-picker.component.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\flowsheet\flowsheet.component.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\navigation-pane\navigation-pane.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\navigation-bar\navigation-bar.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\interfaces\documents\document.interfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\pages\login-intro.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\open-dashboard-file.component.tsx" />
-    <TypeScriptCompile Include="ClientApp\src\pages\open-file.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\pages\dashboard.tsx" />
     <TypeScriptCompile Include="ClientApp\src\react-app-env.d.ts" />
     <TypeScriptCompile Include="ClientApp\src\reportWebVitals.ts" />
     <TypeScriptCompile Include="ClientApp\src\setupTests.ts" />

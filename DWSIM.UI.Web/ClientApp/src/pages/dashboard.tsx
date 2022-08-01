@@ -11,15 +11,16 @@ import { withInitializeDashboard } from "../components/with-initialize-dashboard
 import { msGraphClient } from "../shared/ms-graph/ms-graph-factory";
 import { ReactFileReader } from "react-file-reader";
 
-interface IFileReaderProps {
+interface IDashboardProps {
     filename: string;
     selectedFileType: string;
 }
 
-interface IFileReaderState {
+interface IDashboardState {
     filename?: string;
     file: IDocument[];
     isDataLoaded: boolean;
+    isDashboardInitialized: boolean;
     selectedFileType?: string;
     filterFileTypes: string[];
 }
@@ -143,97 +144,34 @@ const classNames = mergeStyleSets({
         }
     }
 });
+export function Dashboard(WrappedComponent: any) {
+    return class extends React.Component<IDashboardProps, IDashboardState> {
 
-class OpenFilePage extends React.Component<IFileReaderProps, IFileReaderState> {
 
+        constructor(props: IDashboardProps) {
+            super(props);
+            this.state = {
+                isDashboardInitialized: true,
+                isDataLoaded: false,
+                file: [],
+                filename: '',
+                selectedFileType: "dwxmz",
+                filterFileTypes: ["dwxml", "dwxmz", "xml", "dwcsd", "dwcsd2", "dwrsd", "dwrsd2", "dwruf"]
+            };
+        }
+        componentDidMount() {
+        }
 
-    constructor(props: IFileReaderProps) {
-        super(props);
-        this.state = {
-            isDataLoaded: false,
-            file: [],
-            filename: '',
-            selectedFileType: "dwxmz",
-            filterFileTypes: ["dwxml", "dwxmz", "xml", "dwcsd", "dwcsd2", "dwrsd", "dwrsd2", "dwruf"]
-        };
-    }
-    componentDidMount() {
-    }
-    private getFileFromInput(file: File): Promise<any> {
-        return new Promise(function (resolve, reject) {
-            const reader = new FileReader();
-            reader.onerror = reject;
-            reader.onload = function () { resolve(reader.result); };
-            reader.readAsBinaryString(file);
-        });
-    }
-
-    private manageUploadedFile(binary: String, file: File) {
-        console.log('file size is ${binary.length}');
-        console.log('file name is ${file.name}');
-    }
-
-    private openFiles(event: React.ChangeEvent<HTMLInputElement>) {
-        event.persist();
-        Array.from(event.target.files).forEach(file => {
-            this.getFileFromInput(file)
-                .then((binary)=> {
-                    this.manageUploadedFile(binary, file);
-            }).catch(function (reason) {
-                console.log("error during upload ${reason}");
-                event.target.value = '';
-            });
-    });
-}
-    var reader = new FileReader();
-    reader.onloadend = function (e) {
-        var files = e.target.result
-        console.log(files);
-    }
-    reader.readAsText(file)
-}
-
-    render() {
-        const { filename, selectedFileType, filterFileTypes} = this.state;
+        render() {
+            const { filename, selectedFileType, isDashboardInitialized } = this.state;
+            if (isDashboardInitialized) {
+                return <WrappedComponent {...this.props} {...this.state} />;
+            }
+            return null;
 
 
 
-
-        const dropdownControlledExampleOptions = getDropDownOptions(filterFileTypes);
-
-
-        return <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
-            <div style={{ marginLeft: "30px" }}>
-                <div style={{ display: "flex", marginBottom: "5px", marginTop: "5px" }}>
-                    <div style={{ flexBasis: "80%" }} >
-                        <TextField placeholder="Filename" value={filename} onChange={(ev, newValue) => this.setState({ filename: newValue })} />
-                    </div>
-                    <div style={{ flexBasis: "20%" }}>
-                        <input accept="" id="file" multiple={false} type="file" onChange={this.openFiles} />
-                        <DefaultButton text="Upload File" styles={{ root: { marginLeft: "10px" } }} onClick={e => e.stopPropagation()} />
-                    </div>
-
-                </div>
-                <div style={{ display: "flex", marginBottom: "5px", marginTop: "5px" }} >
-                    <div style={{ flexBasis: "80%" }}>
-                        <Dropdown
-                            selectedKey={selectedFileType}
-                            placeholder="Select an option"
-                            options={dropdownControlledExampleOptions}
-                            onChange={(e, option) => { this.setState({ selectedFileType: option?.key.toString() }); }}
-
-                        />
-                    </div>
-                    <div style={{ flexBasis: "20%" }}>
-                        <PrimaryButton text="Save" styles={{ root: { marginLeft: "10px" } }} onClick={() => this.setState({ isDataLoaded: false })} />
-                    </div>
-                </div>
-            </div>
-
-        </div>;
-
-
-
+        }
     }
 }
 
@@ -289,6 +227,3 @@ function getFileTypeDropdownOption(extension?: string): IDropdownOption | undefi
     }
 
 }
-
-
-export default withInitializeDashboard(OpenFilePage);
