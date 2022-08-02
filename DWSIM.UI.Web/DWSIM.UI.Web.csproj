@@ -120,6 +120,9 @@
     <TypeScriptCompile Include="ClientApp\src\components\navigation-bar\navigation-bar.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\interfaces\documents\document.interfaces.ts" />
+    <TypeScriptCompile Include="ClientApp\src\interfaces\DynamicsManager\iDynamicsManager.ts" />
+    <TypeScriptCompile Include="ClientApp\src\interfaces\flowsheet - Copy\iflowsheet.ts" />
+    <TypeScriptCompile Include="ClientApp\src\interfaces\flowsheet\iflowsheet.ts" />
     <TypeScriptCompile Include="ClientApp\src\pages\login-intro.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\open-dashboard-file.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\dashboard.tsx" />
