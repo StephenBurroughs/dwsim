@@ -11,19 +11,15 @@ import { IDocument, ISelectedFolder, ResponseItemType } from "../../interfaces/d
 import { getFlowsheetListItemsAsync } from "../../api/documents.api";
 import { FileTypeIcon, IFileTypeIconProps } from "../file-type-icon/file-type-icon.component";
 import { getFileTypeIconPropsCustom } from "../file-type-icon/file-type-icon.helpers";
-import NavigationBar from "../navigation-bar/navigation-bar.component";
 import { Client } from "@microsoft/microsoft-graph-client";
 
 interface IFilePickerProps extends RouteComponentProps<IFilePickerRouteProps> {
-    baseFolder: ISelectedFolder;
     siteId: string;
-    flowsheetsDriveId: string;
     flowsheetsListId: string;
     defaultFileType?: string;
     filterFileTypes?: string[];
     graphClient: Client;
     onSelectedFileChanged?(selectedDocument: IDocument): void;
-    onSelectedFolderChanged?(folder: ISelectedFolder): void;
 
 
 }
@@ -177,20 +173,20 @@ class FilePicker extends React.Component<IFilePickerProps, IFilePickerState>{
     }
 
     private manageUploadedFile(binary: String, file: File) {
-        //this is where we handle parsing/drawing stuff. event call?
+        //this is where we handle flowsheet data parsing, call iFlowsheet interface.
     }
 
-    private handleFileChange(event: ChangeEvent<HTMLInputElement>) {
+    private handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
         event.persist();
-        Array.from(event.target.files).forEach(file => {
-            this.getFileFromInput(file)
-                .then((binary) => {
-                    this.manageUploadedFile(binary, file);
-                }).catch(function (reason) {
-                    console.log('Error during upload ${reason}');
-                    event.target.value = '';
-                });
-        });
+        //Array.from(event.target.files).forEach(file => {
+        //    this.getFileFromInput(file)
+        //        .then((binary) => {
+        //            this.manageUploadedFile(binary, file);
+        //        }).catch(function (reason) {
+        //            console.log('Error during upload ${reason}');
+        //            event.target.value = '';
+        //        });
+        //});
     }
     //componentDidMount() {
     //    this.getFilesAndFolders();

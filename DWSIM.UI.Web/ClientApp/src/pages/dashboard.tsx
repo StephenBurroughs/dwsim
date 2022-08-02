@@ -7,9 +7,8 @@ import moment from "moment";
 import { FileTypeIcon, IFileTypeIconProps } from "../components/file-type-icon/file-type-icon.component";
 import { getFileTypeIconPropsCustom } from "../components/file-type-icon/file-type-icon.helpers";
 /*import CreateFolderModal from "../components/create-folder-modal/create-folder-modal.component";*/
-import { withInitializeDashboard } from "../components/with-initialize-dashboard.hoc";
 import { msGraphClient } from "../shared/ms-graph/ms-graph-factory";
-import { ReactFileReader } from "react-file-reader";
+import FilePicker from "../components/file-picker/file-picker.component";
 
 interface IDashboardProps {
     filename: string;
@@ -144,12 +143,12 @@ const classNames = mergeStyleSets({
         }
     }
 });
-export function Dashboard(WrappedComponent: any) {
-    return class extends React.Component<IDashboardProps, IDashboardState> {
+class Dashboard extends React.Component<IDashboardProps, IDashboardState> {
 
-
+        private FilePickerRef: React.RefObject<FilePicker>;
         constructor(props: IDashboardProps) {
             super(props);
+            this.FilePickerRef = React.createRef<FilePicker>();
             this.state = {
                 isDashboardInitialized: true,
                 isDataLoaded: false,
@@ -163,17 +162,17 @@ export function Dashboard(WrappedComponent: any) {
         }
 
         render() {
-            const { filename, selectedFileType, isDashboardInitialized } = this.state;
-            if (isDashboardInitialized) {
-                return <WrappedComponent {...this.props} {...this.state} />;
-            }
-            return null;
+            return <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
+                {/*<FilePicker*/}
+                {/*    ref={this.FilePickerRef}*/}
+                {/*    graphClient={msGraphClient}*/}
+                {/*/>*/}
+            </div>
 
 
 
         }
     }
-}
 
 function getDropDownOptions(fileExtensions: string[]): IDropdownOption[] {
 
@@ -227,3 +226,5 @@ function getFileTypeDropdownOption(extension?: string): IDropdownOption | undefi
     }
 
 }
+
+export default Dashboard;

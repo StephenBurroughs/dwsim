@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
-import OpenFilePage from "./pages/dashboard";
+import Dashboard from "./pages/dashboard";
 import LoginIntroPage from "./pages/login-intro.component";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import FilePicker from './components/file-picker/file-picker.component';
 
 //used only when opening in browser while developing
 
@@ -23,8 +24,7 @@ const  App =()=> {
     pauseOnHover
   /> <div className="App">
 
-      <Route path="/" exact component={OpenFilePage} />
-      <Route path="/login/intro" exact component={LoginIntroPage} />
+      <Route path="/" exact component={FilePicker} />
 
     </div> </>;
   
