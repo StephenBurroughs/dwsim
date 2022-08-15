@@ -123,8 +123,6 @@
     <TypeScriptCompile Include="ClientApp\src\interfaces\DynamicsManager\iDynamicsManager.ts" />
     <TypeScriptCompile Include="ClientApp\src\interfaces\flowsheet - Copy\iflowsheet.ts" />
     <TypeScriptCompile Include="ClientApp\src\interfaces\flowsheet\iflowsheet.ts" />
-    <TypeScriptCompile Include="ClientApp\src\pages\login-intro.component.tsx" />
-    <TypeScriptCompile Include="ClientApp\src\pages\open-dashboard-file.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\pages\dashboard.tsx" />
     <TypeScriptCompile Include="ClientApp\src\react-app-env.d.ts" />
     <TypeScriptCompile Include="ClientApp\src\reportWebVitals.ts" />
@@ -143,12 +141,11 @@
     <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if not "$(ConfigurationName)"=="NoNPMBuild" (
-powershell.exe -Command "cd '$(ProjectDir)ClientApp'; $env:CI=$false; npm install; npm run build"
-)</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

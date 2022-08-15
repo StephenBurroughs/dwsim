@@ -11,14 +11,12 @@ import { IDocument, ISelectedFolder, ResponseItemType } from "../../interfaces/d
 import { getFlowsheetListItemsAsync } from "../../api/documents.api";
 import { FileTypeIcon, IFileTypeIconProps } from "../file-type-icon/file-type-icon.component";
 import { getFileTypeIconPropsCustom } from "../file-type-icon/file-type-icon.helpers";
-import { Client } from "@microsoft/microsoft-graph-client";
 
 interface IFilePickerProps extends RouteComponentProps<IFilePickerRouteProps> {
     siteId: string;
     flowsheetsListId: string;
     defaultFileType?: string;
     filterFileTypes?: string[];
-    graphClient: Client;
     onSelectedFileChanged?(selectedDocument: IDocument): void;
 
 

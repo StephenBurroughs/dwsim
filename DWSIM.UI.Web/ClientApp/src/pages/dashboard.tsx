@@ -165,7 +165,6 @@ class Dashboard extends React.Component<IDashboardProps, IDashboardState> {
             return <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
                 {/*<FilePicker*/}
                 {/*    ref={this.FilePickerRef}*/}
-                {/*    graphClient={msGraphClient}*/}
                 {/*/>*/}
             </div>
 
