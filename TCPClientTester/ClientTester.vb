@@ -31,15 +31,16 @@ Module ClientTester
 
             ' Receive the TcpServer.response.
             ' Buffer to store the response bytes.
-            data = New [Byte](256) {}
+            data = New [Byte](1024) {}
 
             ' String to store the response ASCII representation.
             Dim responseData As [String] = [String].Empty
-
-            ' Read the first batch of the TcpServer response bytes.
-            Dim bytes As Int32 = stream.Read(data, 0, data.Length)
+            While stream.DataAvailable
+                ' Read the first batch of the TcpServer response bytes.
+                Dim bytes As Int32 = stream.Read(data, 0, data.Length)
             responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes)
-            Console.WriteLine("Received: {0}", responseData)
+                Console.WriteLine("Received: {0}", responseData)
+            End While
 
             ' Close everything.
             stream.Close()
