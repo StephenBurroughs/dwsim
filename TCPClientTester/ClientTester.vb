@@ -16,8 +16,8 @@ Module ClientTester
             ' combination.
             Dim port As Int32 = 13000
             Dim client As New TcpClient(Server, port)
-            Dim data As [Byte]() = My.Computer.FileSystem.ReadAllBytes("testFile.dwxml")
-            'Dim data As [Byte]() = My.Computer.FileSystem.ReadAllBytes("CavettsProblem.dwxml")
+            'Dim data As [Byte]() = My.Computer.FileSystem.ReadAllBytes("testFile.dwxml")
+            Dim data As [Byte]() = My.Computer.FileSystem.ReadAllBytes("CavettsProblem.dwxml")
             ' Translate the passed message into ASCII and store it as a Byte array.
             'Dim data As [Byte]() = System.Text.Encoding.ASCII.GetBytes(fileByte)
             Dim stringData As String = System.Text.Encoding.UTF8.GetString(data)

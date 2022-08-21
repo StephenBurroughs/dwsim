@@ -71,7 +71,7 @@ Module TCPServer
                 i = stream.Read(bytes, 0, bytes.Length)
                 data = System.Text.Encoding.UTF8.GetString(bytes, 0, i)
                 Console.WriteLine("Received: {0}", data)
-                Dim problemFile() As Byte = New Byte() {}
+                Dim problemFile() As Byte = bytes.Clone
                 Dim fullFile() As Byte = Nothing
                 While stream.DataAvailable '(i <> 0)
                     ' Translate data bytes to a ASCII string.
@@ -83,36 +83,40 @@ Module TCPServer
                     ' Send back a response.
                     'stream.Write(msg, 0, msg.Length)
                     'Console.WriteLine("Sent: {0}", data)
-                    fullFile = problemFile.Concat(bytes).ToArray()
-                    problemFile = fullFile
-                    ffText = System.Text.Encoding.ASCII.GetString(fullFile)
+
                     'Console.WriteLine("Sent: {0}", ffText)
                     i = stream.Read(bytes, 0, bytes.Length)
                     data = System.Text.Encoding.UTF8.GetString(bytes, 0, i)
                     Console.WriteLine("Received: {0}", data)
+                    fullFile = problemFile.Concat(bytes).ToArray()
+                    problemFile = fullFile
+                    ffText = System.Text.Encoding.ASCII.GetString(fullFile)
 
                 End While
-                Using bytestream As New MemoryStream(problemFile)
-                    Using form As FormFlowsheet = DWSIM.UnitOperations.UnitOperations.Flowsheet.InitializeFlowsheet(bytestream, New FormFlowsheet)
-                        If Not solutions.ContainsKey(form.Options.Key) Then
-                            DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, 1, ts)
-                            Dim retbytes As MemoryStream = DWSIM.UnitOperations.UnitOperations.Flowsheet.ReturnProcessData(form)
-                            Using retbytes
-                                Dim uncompressedbytes As Byte() = retbytes.ToArray
-                                Using compressedstream As New MemoryStream()
-                                    Using gzs As New BufferedStream(New Compression.GZipStream(compressedstream, Compression.CompressionMode.Compress, True), 64 * 1024)
-                                        gzs.Write(uncompressedbytes, 0, uncompressedbytes.Length)
-                                        gzs.Close()
-                                        solution = compressedstream.ToArray
-                                        stream.Write(solution, 0, solution.Length)
-                                    End Using
-                                End Using
-                            End Using
-                        End If
-                        'lat.SendArray(solutions(form.Options.Key), 100, sessionid, errmsg)
-                        Console.WriteLine("[" & Date.Now.ToString & "] " & "Byte array length: " & solutions(form.Options.Key).Length)
-                    End Using
-                End Using
+                Console.WriteLine(ControlChars.Cr + " Press Enter to continue...")
+                Console.Read()
+                Console.WriteLine("{0}", ffText)
+                'Using bytestream As New MemoryStream(problemFile)
+                '    Using form As FormFlowsheet = DWSIM.UnitOperations.UnitOperations.Flowsheet.InitializeFlowsheet(bytestream, New FormFlowsheet)
+                '        If Not solutions.ContainsKey(form.Options.Key) Then
+                '            DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, 1, ts)
+                '            Dim retbytes As MemoryStream = DWSIM.UnitOperations.UnitOperations.Flowsheet.ReturnProcessData(form)
+                '            Using retbytes
+                '                Dim uncompressedbytes As Byte() = retbytes.ToArray
+                '                Using compressedstream As New MemoryStream()
+                '                    Using gzs As New BufferedStream(New Compression.GZipStream(compressedstream, Compression.CompressionMode.Compress, True), 64 * 1024)
+                '                        gzs.Write(uncompressedbytes, 0, uncompressedbytes.Length)
+                '                        gzs.Close()
+                '                        solution = compressedstream.ToArray
+                '                        stream.Write(solution, 0, solution.Length)
+                '                    End Using
+                '                End Using
+                '            End Using
+                '        End If
+                '        'lat.SendArray(solutions(form.Options.Key), 100, sessionid, errmsg)
+                '        Console.WriteLine("[" & Date.Now.ToString & "] " & "Byte array length: " & solutions(form.Options.Key).Length)
+                '    End Using
+                'End Using
                 ' Shutdown and end connection
                 client.Close()
 
