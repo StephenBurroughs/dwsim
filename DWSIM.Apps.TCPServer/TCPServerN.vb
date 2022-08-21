@@ -69,12 +69,13 @@ Module TCPServer
                 Dim i As Int32
                 ' Loop to receive all the data sent by the client.
                 i = stream.Read(bytes, 0, bytes.Length)
+                data = System.Text.Encoding.UTF8.GetString(bytes, 0, i)
+                Console.WriteLine("Received: {0}", data)
                 Dim problemFile() As Byte = New Byte() {}
                 Dim fullFile() As Byte = Nothing
                 While stream.DataAvailable '(i <> 0)
                     ' Translate data bytes to a ASCII string.
-                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i)
-                    Console.WriteLine("Received: {0}", data)
+
 
                     ' Process the data sent by the client.
                     'Dim msg As Byte() = System.Text.Encoding.ASCII.GetBytes(data)
@@ -87,6 +88,8 @@ Module TCPServer
                     ffText = System.Text.Encoding.ASCII.GetString(fullFile)
                     'Console.WriteLine("Sent: {0}", ffText)
                     i = stream.Read(bytes, 0, bytes.Length)
+                    data = System.Text.Encoding.UTF8.GetString(bytes, 0, i)
+                    Console.WriteLine("Received: {0}", data)
 
                 End While
                 Using bytestream As New MemoryStream(problemFile)

@@ -16,10 +16,11 @@ Module ClientTester
             ' combination.
             Dim port As Int32 = 13000
             Dim client As New TcpClient(Server, port)
-            Dim data As [Byte]() = My.Computer.FileSystem.ReadAllBytes("CavettsProblem.dwxml")
+            Dim data As [Byte]() = My.Computer.FileSystem.ReadAllBytes("testFile.dwxml")
+            'Dim data As [Byte]() = My.Computer.FileSystem.ReadAllBytes("CavettsProblem.dwxml")
             ' Translate the passed message into ASCII and store it as a Byte array.
             'Dim data As [Byte]() = System.Text.Encoding.ASCII.GetBytes(fileByte)
-            Dim stringData As String = System.Text.Encoding.ASCII.GetString(data)
+            Dim stringData As String = System.Text.Encoding.UTF8.GetString(data)
             ' Get a client stream for reading and writing.
             '  Stream stream = client.GetStream();
             Dim stream As NetworkStream = client.GetStream()
@@ -38,7 +39,7 @@ Module ClientTester
             While stream.DataAvailable
                 ' Read the first batch of the TcpServer response bytes.
                 Dim bytes As Int32 = stream.Read(data, 0, data.Length)
-            responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes)
+                responseData = System.Text.Encoding.UTF8.GetString(data, 0, bytes)
                 Console.WriteLine("Received: {0}", responseData)
             End While
 
