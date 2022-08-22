@@ -24,6 +24,7 @@ Imports System.Threading.Tasks
 Imports DWSIM
 Imports System.Reflection
 Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Text
 
 Module TCPServer
 
@@ -39,9 +40,9 @@ Module TCPServer
         server = Nothing
         Try
             ' Set the TcpListener on port 13000.
+            'Dim indexedByte() As Object
             Dim port As Int32 = 13000
             Dim localAddr As IPAddress = IPAddress.Parse("127.0.0.1")
-
             server = New TcpListener(localAddr, port)
 
             ' Start listening for client requests.
@@ -49,7 +50,8 @@ Module TCPServer
 
             ' Buffer for reading data
             Dim bytes(1024) As Byte
-            Dim solution() As Byte = Nothing
+            Dim index(4) As Byte
+            Dim readData As New List(Of Array)
             Dim data As String = Nothing
             Dim ffText As String = Nothing
             ' Enter the listening loop.
@@ -65,15 +67,19 @@ Module TCPServer
                 ffText = Nothing
                 ' Get a stream object for reading and writing
                 Dim stream As NetworkStream = client.GetStream()
-
+                Dim solution() As Byte = Nothing
                 Dim i As Int32
+                Dim fullFileData As StringBuilder = New StringBuilder()
                 ' Loop to receive all the data sent by the client.
-                i = stream.Read(bytes, 0, bytes.Length)
-                data = System.Text.Encoding.UTF8.GetString(bytes, 0, i)
-                Console.WriteLine("Received: {0}", data)
-                Dim problemFile() As Byte = bytes.Clone
+                'i = stream.Read(index, 0, 4)
+                'i = stream.Read(bytes, 0, bytes.Length)
+                'indexedByte = {index, bytes}
+                'readData.Add(indexedByte)
+                'data = System.Text.Encoding.UTF8.GetString(bytes, 4, i)
+                'Console.WriteLine("Received: {0}", System.Text.Encoding.UTF8.GetString(bytes))
+                'Dim problemFile() As Byte = bytes.Clone
                 Dim fullFile() As Byte = Nothing
-                While stream.DataAvailable '(i <> 0)
+                Do '(i <> 0)
                     ' Translate data bytes to a ASCII string.
 
 
@@ -85,39 +91,57 @@ Module TCPServer
                     'Console.WriteLine("Sent: {0}", data)
 
                     'Console.WriteLine("Sent: {0}", ffText)
+                    'i = stream.Read(index, 0, 4)
                     i = stream.Read(bytes, 0, bytes.Length)
+                    'indexedByte = {index, bytes}
+                    'readData.Add(indexedByte)
                     data = System.Text.Encoding.UTF8.GetString(bytes, 0, i)
-                    Console.WriteLine("Received: {0}", data)
-                    fullFile = problemFile.Concat(bytes).ToArray()
-                    problemFile = fullFile
-                    ffText = System.Text.Encoding.ASCII.GetString(fullFile)
+                    Console.WriteLine("Recieved: {0}", data)
+                    fullFileData.Append(data)
+                    'Console.WriteLine("index: {0}, Packet: {1}", System.Text.Encoding.UTF8.GetString(index), System.Text.Encoding.UTF8.GetString(bytes))
+                    'fullFile = problemFile.Concat(bytes).ToArray()
+                    'problemFile = fullFile
 
-                End While
-                Console.WriteLine(ControlChars.Cr + " Press Enter to continue...")
-                Console.Read()
-                Console.WriteLine("{0}", ffText)
-                'Using bytestream As New MemoryStream(problemFile)
-                '    Using form As FormFlowsheet = DWSIM.UnitOperations.UnitOperations.Flowsheet.InitializeFlowsheet(bytestream, New FormFlowsheet)
-                '        If Not solutions.ContainsKey(form.Options.Key) Then
-                '            DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, 1, ts)
-                '            Dim retbytes As MemoryStream = DWSIM.UnitOperations.UnitOperations.Flowsheet.ReturnProcessData(form)
-                '            Using retbytes
-                '                Dim uncompressedbytes As Byte() = retbytes.ToArray
-                '                Using compressedstream As New MemoryStream()
-                '                    Using gzs As New BufferedStream(New Compression.GZipStream(compressedstream, Compression.CompressionMode.Compress, True), 64 * 1024)
-                '                        gzs.Write(uncompressedbytes, 0, uncompressedbytes.Length)
-                '                        gzs.Close()
-                '                        solution = compressedstream.ToArray
-                '                        stream.Write(solution, 0, solution.Length)
-                '                    End Using
-                '                End Using
-                '            End Using
+                Loop While stream.DataAvailable
+                'i = 0
+                'While i < readData.Count
+                '    Dim packetIndex As Int32
+                '    For Each packet As Array In readData
+                '        If packet(0).SequenceEqual(BitConverter.GetBytes(i)) Then
+                '            fullFile.Append(packet(1))
+                '            i += 1
+                '            packetIndex = readData.IndexOf(packet)
+                '            Exit For
                 '        End If
-                '        'lat.SendArray(solutions(form.Options.Key), 100, sessionid, errmsg)
-                '        Console.WriteLine("[" & Date.Now.ToString & "] " & "Byte array length: " & solutions(form.Options.Key).Length)
-                '    End Using
-                'End Using
-                ' Shutdown and end connection
+                '    Next
+                '    readData.RemoveAt(packetIndex)
+                'End While
+                'ffText = System.Text.Encoding.ASCII.GetString(fullFile)
+                'Console.WriteLine(ControlChars.Cr + " Press Enter to continue...")
+                'Console.Read()
+                'Console.WriteLine("{0}", fullFileData)
+                Using bytestream As New MemoryStream(System.Text.Encoding.UTF8.GetBytes(fullFileData.ToString))
+                    Using form As FormFlowsheet = DWSIM.UnitOperations.UnitOperations.Flowsheet.InitializeFlowsheet(bytestream, New FormFlowsheet)
+                        If Not solutions.ContainsKey(form.Options.Key) Then
+                            DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, 1, ts)
+                            Dim retbytes As MemoryStream = DWSIM.UnitOperations.UnitOperations.Flowsheet.ReturnProcessData(form)
+                            Using retbytes
+                                Dim uncompressedbytes As Byte() = retbytes.ToArray
+                                Using compressedstream As New MemoryStream()
+                                    Using gzs As New BufferedStream(New Compression.GZipStream(compressedstream, Compression.CompressionMode.Compress, True), 64 * 1024)
+                                        gzs.Write(uncompressedbytes, 0, uncompressedbytes.Length)
+                                        gzs.Close()
+                                        solution = compressedstream.ToArray
+                                        stream.Write(solution, 0, solution.Length)
+                                    End Using
+                                End Using
+                            End Using
+                        End If
+                        'lat.SendArray(solutions(form.Options.Key), 100, sessionid, errmsg)
+                        Console.WriteLine("[" & Date.Now.ToString & "] " & "Byte array length: " & solutions(form.Options.Key).Length)
+                    End Using
+                End Using
+                'Shutdown And end connection
                 client.Close()
 
             End While

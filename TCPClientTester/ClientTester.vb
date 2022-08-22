@@ -4,7 +4,7 @@ Imports System.Net.Sockets
 Imports System.Text
 Imports System.FileIO
 Module ClientTester
-
+    Dim bytes(1023) As Byte
     Public Sub Main()
         Connect("127.0.0.1")
     End Sub
@@ -14,21 +14,37 @@ Module ClientTester
             ' Note, for this client to work you need to have a TcpServer 
             ' connected to the same address as specified by the server, port
             ' combination.
+            Dim bytesWritten As Int32 = 0
+            Dim i As Int32 = 0
             Dim port As Int32 = 13000
             Dim client As New TcpClient(Server, port)
             'Dim data As [Byte]() = My.Computer.FileSystem.ReadAllBytes("testFile.dwxml")
             Dim data As [Byte]() = My.Computer.FileSystem.ReadAllBytes("CavettsProblem.dwxml")
+
             ' Translate the passed message into ASCII and store it as a Byte array.
             'Dim data As [Byte]() = System.Text.Encoding.ASCII.GetBytes(fileByte)
             Dim stringData As String = System.Text.Encoding.UTF8.GetString(data)
             ' Get a client stream for reading and writing.
+
             '  Stream stream = client.GetStream();
             Dim stream As NetworkStream = client.GetStream()
+            stream.Write(data, 0, data.Length)
+            Console.WriteLine("Sent: {0}", System.Text.Encoding.UTF8.GetString(data))
 
             ' Send the message to the connected TcpServer. 
-            stream.Write(data, 0, data.Length)
+            'While bytesWritten < data.Length
+            '    Dim iBytes As Byte() = BitConverter.GetBytes(i)
+            '    Array.Copy(iBytes, 0, bytes, 0, iBytes.Length)
+            '    Array.Copy(data, bytesWritten, bytes, 4, 1020)
+            '    stream.Write(bytes, 0, bytes.Length)
+            '    Console.WriteLine("Sent: {0}", System.Text.Encoding.UTF8.GetString(bytes))
+            '    Console.WriteLine("iBytes size: {0}, bytes size: {1}", iBytes.Length, bytes.Length)
+            '    bytesWritten += 1020
+            '    i += 1
+            'End While
 
-            Console.WriteLine("Sent: {0}", stringData)
+
+
 
             ' Receive the TcpServer.response.
             ' Buffer to store the response bytes.
