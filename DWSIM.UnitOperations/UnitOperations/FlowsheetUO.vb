@@ -220,14 +220,32 @@ Label_00CC:
         End Function
 
         Public Shared Function InitializeFlowsheet(compressedstream As MemoryStream, form As IFlowsheet) As IFlowsheet
+            Dim bytes(1024) As Byte
+            Dim i As Int32
+            Dim Data = Nothing
+            Dim path = "C:\Users\User\Documents\GitHub\dwsim\TCPClientTester\bin\Debug\file.dwxml"
+            If File.Exists(path) Then
+                File.Delete(path)
+            End If
+            Dim fs As FileStream = File.Create(path)
+            Dim fileArray = compressedstream.ToArray
+            fs.Write(fileArray, 0, fileArray.Length)
+            fs.Close()
+
             Using decompressedstream As New IO.MemoryStream
                 compressedstream.Position = 0
-                Using gzs As New IO.BufferedStream(New Compression.GZipStream(compressedstream, Compression.CompressionMode.Decompress, True), 64 * 1024)
-                    gzs.CopyTo(decompressedstream)
-                    gzs.Close()
-                    decompressedstream.Position = 0
-                    Return InitializeFlowsheetInternal(XDocument.Load(decompressedstream), form)
-                End Using
+                i = compressedstream.Read(bytes, 0, bytes.Length)
+                'indexedByte = {index, bytes}
+                'readData.Add(indexedByte)
+                Data = System.Text.Encoding.UTF8.GetString(bytes, 0, i)
+                Console.WriteLine("Recieved: {0}", Data)
+                Return InitializeFlowsheetInternal(XDocument.Load(compressedstream), form)
+                'Using gzs As New IO.BufferedStream(New Compression.GZipStream(compressedstream, Compression.CompressionMode.Decompress, True), 64 * 1024)
+                '    gzs.CopyTo(decompressedstream)
+                '    gzs.Close()
+                '    decompressedstream.Position = 0
+                '    Return InitializeFlowsheetInternal(XDocument.Load(decompressedstream), form)
+                'End Using
             End Using
         End Function
 

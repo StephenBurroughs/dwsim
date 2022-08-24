@@ -117,9 +117,10 @@ Module TCPServer
                 '    readData.RemoveAt(packetIndex)
                 'End While
                 'ffText = System.Text.Encoding.ASCII.GetString(fullFile)
-                'Console.WriteLine(ControlChars.Cr + " Press Enter to continue...")
-                'Console.Read()
-                'Console.WriteLine("{0}", fullFileData)
+                Console.WriteLine(ControlChars.Cr + " Press Enter to continue...")
+                Console.Read()
+                Console.WriteLine("{0}", System.Text.Encoding.UTF8.GetString(System.Text.Encoding.UTF8.GetBytes(fullFileData.ToString)))
+                bytes = System.Text.Encoding.UTF8.GetBytes(fullFileData.ToString)
                 Using bytestream As New MemoryStream(System.Text.Encoding.UTF8.GetBytes(fullFileData.ToString))
                     Using form As FormFlowsheet = DWSIM.UnitOperations.UnitOperations.Flowsheet.InitializeFlowsheet(bytestream, New FormFlowsheet)
                         If Not solutions.ContainsKey(form.Options.Key) Then

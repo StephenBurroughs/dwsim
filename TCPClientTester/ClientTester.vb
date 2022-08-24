@@ -2,7 +2,6 @@
 Imports System.IO
 Imports System.Net.Sockets
 Imports System.Text
-Imports System.FileIO
 Module ClientTester
     Dim bytes(1023) As Byte
     Public Sub Main()
@@ -28,7 +27,7 @@ Module ClientTester
 
             '  Stream stream = client.GetStream();
             Dim stream As NetworkStream = client.GetStream()
-            stream.Write(data, 0, data.Length)
+            stream.Write(data, 3, data.Length - 3)
             Console.WriteLine("Sent: {0}", System.Text.Encoding.UTF8.GetString(data))
 
             ' Send the message to the connected TcpServer. 
